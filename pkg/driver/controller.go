@@ -53,6 +53,7 @@ const (
 	volumeParamsDailyAutomaticBackupStartTime = "dailyAutomaticBackupStartTime"
 	volumeParamsCopyTagsToBackups             = "copyTagsToBackups"
 	volumeParamsDataCompressionType           = "dataCompressionType"
+	volumeParamsFileSystemTypeVersion         = "fileSystemTypeVersion"
 )
 
 func (d *Driver) CreateVolume(ctx context.Context, req *csi.CreateVolumeRequest) (*csi.CreateVolumeResponse, error) {
@@ -131,6 +132,10 @@ func (d *Driver) CreateVolume(ctx context.Context, req *csi.CreateVolumeRequest)
 
 	if val, ok := volumeParams[volumeParamsDataCompressionType]; ok {
 		fsOptions.DataCompressionType = val
+	}
+
+	if val, ok := volumeParams[volumeParamsFileSystemTypeVersion]; ok {
+		fsOptions.FileSystemTypeVersion = val
 	}
 
 	if val, ok := volumeParams[volumeParamsPerUnitStorageThroughput]; ok {

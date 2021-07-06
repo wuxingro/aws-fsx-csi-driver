@@ -12,5 +12,6 @@ parameters:
   copyTagsToBackups: "true"
   perUnitStorageThroughput: "200"
   dataCompressionType: "NONE"
+  fileSystemTypeVersion: "2.10"
 mountOptions:
   - flock

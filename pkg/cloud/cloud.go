@@ -81,6 +81,7 @@ type FileSystemOptions struct {
 	AutomaticBackupRetentionDays  int64
 	CopyTagsToBackups             bool
 	DataCompressionType           string
+	FileSystemTypeVersion         string
 }
 
 // FSx abstracts FSx client to facilitate its mocking.
@@ -162,12 +163,13 @@ func (c *cloud) CreateFileSystem(ctx context.Context, volumeName string, fileSys
 	}
 
 	input := &fsx.CreateFileSystemInput{
-		ClientRequestToken:  aws.String(volumeName),
-		FileSystemType:      aws.String("LUSTRE"),
-		LustreConfiguration: lustreConfiguration,
-		StorageCapacity:     aws.Int64(fileSystemOptions.CapacityGiB),
-		SubnetIds:           []*string{aws.String(fileSystemOptions.SubnetId)},
-		SecurityGroupIds:    aws.StringSlice(fileSystemOptions.SecurityGroupIds),
+		ClientRequestToken:    aws.String(volumeName),
+		FileSystemType:        aws.String("LUSTRE"),
+		LustreConfiguration:   lustreConfiguration,
+		StorageCapacity:       aws.Int64(fileSystemOptions.CapacityGiB),
+		SubnetIds:             []*string{aws.String(fileSystemOptions.SubnetId)},
+		SecurityGroupIds:      aws.StringSlice(fileSystemOptions.SecurityGroupIds),
+		FileSystemTypeVersion: aws.String(fileSystemOptions.FileSystemTypeVersion),
 		Tags: []*fsx.Tag{
 			{
 				Key:   aws.String(VolumeNameTagKey),

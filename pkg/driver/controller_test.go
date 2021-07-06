@@ -221,6 +221,7 @@ func TestCreateVolume(t *testing.T) {
 						volumeParamsDailyAutomaticBackupStartTime: "00:00",
 						volumeParamsCopyTagsToBackups:             "true",
 						volumeParamsDataCompressionType:           "LZ4",
+						volumeParamsFileSystemTypeVersion:         "2.12",
 					},
 				}
 
